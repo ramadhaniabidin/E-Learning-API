@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FwRn5vsoxaXjprpMp9grogygTVqUr4s0QPyYB0FJcblhoVnp2LysruDpR9kXJrBJ2RfpRZeLmHWYm8oVbTFYFA==",
+  "dgSpecHash": "LBWXsP1DiPY40FvsptWU1mEysjyigioMqksZY43XtAZ7K4HI2MYGX+eK+BhsaXq+Qi6/MLdRGclDTX2Cr4JdZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Bidin\\Documents\\BELAJAR\\C#\\.NET\\API\\E-Learning.API\\E-Learning.Logics\\E-Learning.Logics.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,9 @@
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.0\\microsoft.data.sqlclient.sni.runtime.5.1.0.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.identity.client\\4.47.2\\microsoft.identity.client.4.47.2.nupkg.sha512",
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.identity.client.extensions.msal\\2.19.3\\microsoft.identity.client.extensions.msal.2.19.3.nupkg.sha512",
     "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.24.0\\microsoft.identitymodel.abstractions.6.24.0.nupkg.sha512",
