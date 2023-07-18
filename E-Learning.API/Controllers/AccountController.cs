@@ -13,10 +13,10 @@ namespace E_Learning.API.Controllers
             _accountRepository = accountRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         public IActionResult GetAllAccounts()
