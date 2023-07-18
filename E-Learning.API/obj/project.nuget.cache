@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "19mGAECQM2ZP86ANlLI5srQ6lpM3AHxlD2+5N+9Wv2ksTg9LIuPgN2cU7j4N1Sap3jZRbuOJeSfYHgL2oAmMsQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Bidin\\Documents\\BELAJAR\\C#\\.NET\\API\\E-Learning.API\\E-Learning.API\\E-Learning.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Bidin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
