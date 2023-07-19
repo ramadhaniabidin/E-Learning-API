@@ -10,5 +10,6 @@ namespace E_Learning.Logics.Repostiory.Interface
     public interface IAccountRepository
     {
         public List<AccountModel> GetAllAccounts();
+        public int GetAccountID(string username, string password);
     }
 }
