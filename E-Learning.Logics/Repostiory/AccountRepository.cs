@@ -20,6 +20,15 @@ namespace E_Learning.Logics.Repostiory
             connecton = configuration.GetConnectionString("E-Learning");
         }
 
+        public int GetAccountID(string username, string password)
+        {
+            using var con = new SqlConnection(connecton);
+            con.Open();
+            var query = @"SELECT id FROM master_akun WHERE username=@username AND password=@password";
+            var id = con.QueryFirstOrDefault<int>(query, new { username, password });
+            return id;
+        }
+
         public List<AccountModel> GetAllAccounts()
         {
             using var con = new SqlConnection(connecton);

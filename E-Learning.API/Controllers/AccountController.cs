@@ -24,5 +24,12 @@ namespace E_Learning.API.Controllers
             var res = _accountRepository.GetAllAccounts();
             return Ok(res);
         }
+
+        [HttpGet("username/{username}/password/{password}")]
+        public IActionResult GetAccountID(string username, string password)
+        {
+            var res = _accountRepository.GetAccountID(username, password);
+            return Ok(res);
+        }
     }
 }
