@@ -1,4 +1,5 @@
-﻿using E_Learning.Logics.Repostiory.Interface;
+﻿using E_Learning.Logics.Models;
+using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.API.Controllers
@@ -17,6 +18,13 @@ namespace E_Learning.API.Controllers
         //{
         //    return View();
         //}
+
+        [HttpPost]
+        public IActionResult CreateAccount([FromBody] AccountModel model)
+        {
+            var result = _accountRepository.CreateNewAccount(model);
+            return Ok(result);
+        }
 
         [HttpGet]
         public IActionResult GetAllAccounts()
