@@ -25,20 +25,34 @@ namespace E_Learning.Logics.Repostiory
         {
             try
             {
-                using var con = new SqlConnection(connecton);
-                con.Open();
-                var query = @"INSERT INTO master_akun (username, password, tanggal_daftar, id_peran)
-                VALUES (@username, @password, @tanggal_daftar, @id_peran)";
-
-                con.ExecuteAsync(query, account);
-
-                var result = new
+                if(account != null)
                 {
-                    ProcessSucces = true,
-                    InfoMessage = "Successfully Created new account"
-                };
+                    using var con = new SqlConnection(connecton);
+                    con.Open();
+                    var query = @"INSERT INTO master_akun (username, password, tanggal_daftar, id_peran)
+                    VALUES (@username, @password, @tanggal_daftar, @id_peran)";
 
-                return JsonSerializer.Serialize(result);
+                    con.Execute(query, account);
+
+                    var result = new
+                    {
+                        ProcessSucces = true,
+                        InfoMessage = "Successfully Created new account"
+                    };
+                    return JsonSerializer.Serialize(result);
+                }
+
+                else
+                {
+                    var result = new
+                    {
+                        ProcessSucces = false,
+                        InfoMessage = "Error: The inserted data is null"
+                    };
+                    return JsonSerializer.Serialize(result);
+                }
+
+
             }
             
             catch (Exception ex)

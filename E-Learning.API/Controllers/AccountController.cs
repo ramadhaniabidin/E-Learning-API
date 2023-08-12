@@ -1,6 +1,7 @@
 ﻿using E_Learning.Logics.Models;
 using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace E_Learning.API.Controllers
 {
@@ -20,9 +21,10 @@ namespace E_Learning.API.Controllers
         //}
 
         [HttpPost]
-        public IActionResult CreateAccount([FromBody] AccountModel model)
+        public IActionResult CreateAccount( AccountModel model)
         {
             var result = _accountRepository.CreateNewAccount(model);
+            Console.WriteLine("Received Data: " + JsonConvert.SerializeObject(model));
             return Ok(result);
         }
 

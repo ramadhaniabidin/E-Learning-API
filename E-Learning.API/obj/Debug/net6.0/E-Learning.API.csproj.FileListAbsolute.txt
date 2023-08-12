@@ -142,3 +142,4 @@ C:\Users\ramad\OneDrive\Documents\Belajar\.NET Web API\E-Learning-API\E-Learning
 C:\Users\ramad\OneDrive\Documents\Belajar\.NET Web API\E-Learning-API\E-Learning.API\obj\Debug\net6.0\E-Learning.API.pdb
 C:\Users\ramad\OneDrive\Documents\Belajar\.NET Web API\E-Learning-API\E-Learning.API\obj\Debug\net6.0\E-Learning.API.genruntimeconfig.cache
 C:\Users\ramad\OneDrive\Documents\Belajar\.NET Web API\E-Learning-API\E-Learning.API\obj\Debug\net6.0\ref\E-Learning.API.dll
+C:\Users\ramad\OneDrive\Documents\Belajar\.NET Web API\E-Learning-API\E-Learning.API\bin\Debug\net6.0\Newtonsoft.Json.dll
