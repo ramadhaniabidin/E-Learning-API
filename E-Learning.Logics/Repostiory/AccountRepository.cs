@@ -67,6 +67,57 @@ namespace E_Learning.Logics.Repostiory
             }
         }
 
+        public string GetAccountByUsername(string username)
+        {
+            var returnedOutput = "";
+
+            try
+            {
+                using(var con = new SqlConnection(connecton))
+                {
+                    con.Open();
+                    var query = @"SELECT * FROM dbo.master_akun WHERE username = @username";
+                    var account = con.QueryFirstOrDefault<AccountModel>(query, new {username});
+
+                    if(account != null)
+                    {
+                        var result = new
+                        {
+                            ProcessSuccess = true,
+                            InfoMessage = "Account found",
+                            account
+                        };
+
+                        returnedOutput = JsonSerializer.Serialize(result);
+                    }
+
+                    else
+                    {
+                        var result = new
+                        {
+                            ProcessSuccess = false,
+                            InfoMessage = "Account not found, please insert a valid username"
+                        };
+
+                        returnedOutput = JsonSerializer.Serialize(result);
+                    }
+                }
+            }
+
+            catch(Exception ex)
+            {
+                var result = new
+                {
+                    ProcessSuccess = false,
+                    InfoMessage = $"Error: {ex.Message}"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(result);
+            }
+
+            return returnedOutput;
+        }
+
         public int GetAccountID(string username, string password)
         {
             using var con = new SqlConnection(connecton);

@@ -20,6 +20,13 @@ namespace E_Learning.API.Controllers
         //    return View();
         //}
 
+        [HttpGet("username/{username}")]
+        public IActionResult GetAccountByUsername(string username)
+        {
+            var account = _accountRepository.GetAccountByUsername(username);
+            return Ok(account);
+        }
+
         [HttpPost]
         public IActionResult CreateAccount( AccountModel model)
         {

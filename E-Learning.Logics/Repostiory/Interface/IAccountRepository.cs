@@ -12,6 +12,6 @@ namespace E_Learning.Logics.Repostiory.Interface
         public List<AccountModel> GetAllAccounts();
         public int GetAccountID(string username, string password);
         public string CreateNewAccount(AccountModel account);
-        public Task<AccountModel> GetAccountByUsername(string username);
+        public string GetAccountByUsername(string username);
     }
 }
