@@ -37,5 +37,19 @@ namespace E_Learning.Logics.Repostiory
             var kabupaten = con.Query<KabupatenModel>(query, new {provinsiName}).ToList();
             return kabupaten;
         }
+
+        public List<KecamatanModel> GetKecamatan(string provinsiName, string kabupatenName)
+        {
+            using var con = new SqlConnection(connection);
+            con.Open();
+            var query = @"DECLARE @idProv INT
+            SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+            DECLARE @idKab INT
+            SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+            SELECT * FROM dbo.Kecamatan WHERE idKab = @idKab";
+
+            var kecamatan = con.Query<KecamatanModel>(query, new {provinsiName, kabupatenName}).ToList();
+            return kecamatan;
+        }
     }
 }
