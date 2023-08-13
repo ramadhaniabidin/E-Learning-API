@@ -10,5 +10,6 @@ namespace E_Learning.Logics.Repostiory.Interface
     public interface IAddressRepository
     {
         public List<ProvinsiModel> GetAllProvinsi();
+        public List<KabupatenModel> GetKabupatenByProvinsiName(string provinsiName);
     }
 }

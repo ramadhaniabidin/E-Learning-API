@@ -28,5 +28,14 @@ namespace E_Learning.Logics.Repostiory
 
             return province;
         }
+
+        public List<KabupatenModel> GetKabupatenByProvinsiName(string provinsiName)
+        {
+            using var con = new SqlConnection(connection);
+            con.Open();
+            var query = @"SELECT * FROM dbo.Kabupaten WHERE idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)";
+            var kabupaten = con.Query<KabupatenModel>(query, new {provinsiName}).ToList();
+            return kabupaten;
+        }
     }
 }
