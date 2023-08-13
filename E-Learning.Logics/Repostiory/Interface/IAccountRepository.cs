@@ -13,5 +13,6 @@ namespace E_Learning.Logics.Repostiory.Interface
         public int GetAccountID(string username, string password);
         public string CreateNewAccount(AccountModel account);
         public string GetAccountByUsername(string username);
+        public string UpdatePassword(string username, string newPassword);
     }
 }
