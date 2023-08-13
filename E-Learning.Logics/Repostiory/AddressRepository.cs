@@ -19,6 +19,20 @@ namespace E_Learning.Logics.Repostiory
             connection = configuration.GetConnectionString("E-Learning");
         }
 
+        public List<DesaModel> GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName)
+        {
+            using var con = new SqlConnection(connection);
+            con.Open();
+            var query = @"DECLARE @idProv INT SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+            DECLARE @idKab INT SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+            DECLARE @idKec INT SET @idKec = (SELECT id FROM dbo.Kecamatan WHERE namaKecamatan = @kecamatanName AND @idKab = @idKab)
+
+            SELECT * FROM dbo.Desa WHERE idKec = @idKec";
+
+            var desa = con.Query<DesaModel>(query, new {provinsiName, kabupatenName, kecamatanName}).ToList();
+            return desa;
+        }
+
         public List<ProvinsiModel> GetAllProvinsi()
         {
             using var con = new SqlConnection(connection);

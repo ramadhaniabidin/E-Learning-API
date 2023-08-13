@@ -33,5 +33,12 @@ namespace E_Learning.API.Controllers
             var kecamatan = _addressRepository.GetKecamatan(provinsi, kabupaten);
             return Ok(kecamatan);
         }
+
+        [HttpGet("provinsi/{provinsi}/kabupaten/{kabupaten}/kecamatan/{kecamatan}")]
+        public IActionResult GetAllDesa(string provinsi, string kabupaten, string kecamatan)
+        {
+            var desa = _addressRepository.GetAllDesa(provinsi, kabupaten, kecamatan);
+            return Ok(desa);
+        }
     }
 }
