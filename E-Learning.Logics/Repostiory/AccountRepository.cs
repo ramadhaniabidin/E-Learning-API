@@ -135,5 +135,38 @@ namespace E_Learning.Logics.Repostiory
             var accounts = con.Query<AccountModel>(query).ToList();
             return accounts;
         }
+
+        public string UpdatePassword(string username, string newPassword)
+        {
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connecton);
+                con.Open();
+                var query = "UPDATE dbo.master_akun SET password = @newPassword WHERE username = @username";
+                con.Execute(query, new {newPassword, username});
+
+                var resultBody = new
+                {
+                    ProcessSuccess = true,
+                    InfoMessage = "Successfully resetting your password"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(resultBody);
+            }
+
+            catch (Exception ex)
+            {
+                var resultBody = new
+                {
+                    ProcessSuccess = false,
+                    InfoMessage = $"Error: {ex.Message}"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(resultBody);
+            }
+
+            return returnedOutput;
+        }
     }
 }
