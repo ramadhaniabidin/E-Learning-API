@@ -20,6 +20,14 @@ namespace E_Learning.API.Controllers
         //    return View();
         //}
 
+        [HttpPut("username/{username}/newPassword/{newPassword}")]
+        public IActionResult UpdatePassword(string username, string newPassword)
+        {
+            var result = _accountRepository.UpdatePassword(username, newPassword);
+            return Ok(result);
+        }
+
+
         [HttpGet("username/{username}")]
         public IActionResult GetAccountByUsername(string username)
         {

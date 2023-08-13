@@ -143,16 +143,36 @@ namespace E_Learning.Logics.Repostiory
             {
                 using var con = new SqlConnection(connecton);
                 con.Open();
-                var query = "UPDATE dbo.master_akun SET password = @newPassword WHERE username = @username";
-                con.Execute(query, new {newPassword, username});
 
-                var resultBody = new
+                var checkUserExistQuery = "SELECT COUNT(*) FROM dbo.master_akun WHERE username = @username";
+                int userCount = con.ExecuteScalar<int>(checkUserExistQuery, new {username});
+
+                if(userCount == 0)
                 {
-                    ProcessSuccess = true,
-                    InfoMessage = "Successfully resetting your password"
-                };
+                    var resultBody = new
+                    {
+                        ProcessSuccess = false,
+                        InfoMessage = "Username not found"
+                    };
 
-                returnedOutput = JsonSerializer.Serialize(resultBody);
+                    returnedOutput = JsonSerializer.Serialize(resultBody);
+                }
+
+                else
+                {
+                    var query = "UPDATE dbo.master_akun SET password = @newPassword WHERE username = @username";
+                    con.Execute(query, new { newPassword, username });
+
+                    var resultBody = new
+                    {
+                        ProcessSuccess = true,
+                        InfoMessage = "Successfully resetting your password"
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(resultBody);
+                }
+
+
             }
 
             catch (Exception ex)
