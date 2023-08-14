@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace E_Learning.Logics.Repostiory
@@ -33,14 +34,52 @@ namespace E_Learning.Logics.Repostiory
             return desa;
         }
 
-        public List<ProvinsiModel> GetAllProvinsi()
+        public string GetAllProvinsi()
         {
-            using var con = new SqlConnection(connection);
-            con.Open();
-            var query = "SELECT * FROM dbo.Provinsi";
-            var province = con.Query<ProvinsiModel>(query).ToList();
+            var returnedOutput = "";
 
-            return province;
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = "SELECT * FROM dbo.Provinsi";
+                var province = con.Query<ProvinsiModel>(query).ToList();
+
+                if(province != null)
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "Berhasil mendapatkan data Provinsi",
+                        Provinsi = province
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error!"
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+            }
+
+            //return province;
+            return returnedOutput;
         }
 
         public List<KabupatenModel> GetKabupatenByProvinsiName(string provinsiName)
