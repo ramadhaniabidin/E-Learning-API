@@ -10,7 +10,7 @@ namespace E_Learning.Logics.Repostiory.Interface
     public interface IAddressRepository
     {
         public string GetAllProvinsi();
-        public List<KabupatenModel> GetKabupatenByProvinsiName(string provinsiName);
+        public string GetKabupatenByProvinsiName(string provinsiName);
         public List<KecamatanModel> GetKecamatan(string provinsiName, string kabupatenName);
         public List<DesaModel> GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName);
     }

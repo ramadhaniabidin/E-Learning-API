@@ -82,13 +82,51 @@ namespace E_Learning.Logics.Repostiory
             return returnedOutput;
         }
 
-        public List<KabupatenModel> GetKabupatenByProvinsiName(string provinsiName)
+        public string GetKabupatenByProvinsiName(string provinsiName)
         {
-            using var con = new SqlConnection(connection);
-            con.Open();
-            var query = @"SELECT * FROM dbo.Kabupaten WHERE idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)";
-            var kabupaten = con.Query<KabupatenModel>(query, new {provinsiName}).ToList();
-            return kabupaten;
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"SELECT * FROM dbo.Kabupaten WHERE idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)";
+                var kabupaten = con.Query<KabupatenModel>(query, new { provinsiName }).ToList();
+
+                if(kabupaten != null)
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "Berhasil mendapatkan data Kabupaten/Kota",
+                        kabupaten
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error!, mohon periksa kembali parameter yang Anda masukkan"
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = true,
+                    Message = $"Error: {ex.Message}"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+            return returnedOutput;
         }
 
         public List<KecamatanModel> GetKecamatan(string provinsiName, string kabupatenName)
