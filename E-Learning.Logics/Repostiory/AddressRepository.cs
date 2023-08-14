@@ -45,7 +45,7 @@ namespace E_Learning.Logics.Repostiory
                 var query = "SELECT * FROM dbo.Provinsi";
                 var province = con.Query<ProvinsiModel>(query).ToList();
 
-                if(province != null)
+                if((province != null) && (province.Count > 0))
                 {
                     var responseBody = new
                     {
@@ -92,7 +92,7 @@ namespace E_Learning.Logics.Repostiory
                 var query = @"SELECT * FROM dbo.Kabupaten WHERE idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)";
                 var kabupaten = con.Query<KabupatenModel>(query, new { provinsiName }).ToList();
 
-                if(kabupaten != null)
+                if((kabupaten != null) && (kabupaten.Count > 0))
                 {
                     var responseBody = new
                     {
@@ -129,18 +129,58 @@ namespace E_Learning.Logics.Repostiory
             return returnedOutput;
         }
 
-        public List<KecamatanModel> GetKecamatan(string provinsiName, string kabupatenName)
+        public string GetKecamatan(string provinsiName, string kabupatenName)
         {
-            using var con = new SqlConnection(connection);
-            con.Open();
-            var query = @"DECLARE @idProv INT
-            SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
-            DECLARE @idKab INT
-            SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
-            SELECT * FROM dbo.Kecamatan WHERE idKab = @idKab";
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"DECLARE @idProv INT
+                SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+                DECLARE @idKab INT
+                SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+                SELECT * FROM dbo.Kecamatan WHERE idKab = @idKab";
 
-            var kecamatan = con.Query<KecamatanModel>(query, new {provinsiName, kabupatenName}).ToList();
-            return kecamatan;
+                var kecamatan = con.Query<KecamatanModel>(query, new { provinsiName, kabupatenName }).ToList();
+
+                if((kecamatan != null) && (kecamatan.Count > 0))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "Berhasil mendapatkan data Kabupaten/Kota",
+                        kecamatan
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error!, mohon periksa kembali parameter yang Anda masukkan"
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+
+
+            return returnedOutput;
         }
     }
 }
