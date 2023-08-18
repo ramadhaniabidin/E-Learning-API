@@ -12,6 +12,6 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string GetAllProvinsi();
         public string GetKabupatenByProvinsiName(string provinsiName);
         public string GetKecamatan(string provinsiName, string kabupatenName);
-        public List<DesaModel> GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName);
+        public string GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName);
     }
 }

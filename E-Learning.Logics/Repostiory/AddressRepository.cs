@@ -6,8 +6,10 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace E_Learning.Logics.Repostiory
@@ -20,18 +22,58 @@ namespace E_Learning.Logics.Repostiory
             connection = configuration.GetConnectionString("E-Learning");
         }
 
-        public List<DesaModel> GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName)
+        public string GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName)
         {
-            using var con = new SqlConnection(connection);
-            con.Open();
-            var query = @"DECLARE @idProv INT SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
-            DECLARE @idKab INT SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
-            DECLARE @idKec INT SET @idKec = (SELECT id FROM dbo.Kecamatan WHERE namaKecamatan = @kecamatanName AND @idKab = @idKab)
+            string returnedOutput = "";
 
-            SELECT * FROM dbo.Desa WHERE idKec = @idKec";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"DECLARE @idProv INT SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+                DECLARE @idKab INT SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+                DECLARE @idKec INT SET @idKec = (SELECT id FROM dbo.Kecamatan WHERE namaKecamatan = @kecamatanName AND @idKab = @idKab)
 
-            var desa = con.Query<DesaModel>(query, new {provinsiName, kabupatenName, kecamatanName}).ToList();
-            return desa;
+                SELECT * FROM dbo.Desa WHERE idKec = @idKec";
+
+                var desa = con.Query<DesaModel>(query, new { provinsiName, kabupatenName, kecamatanName }).ToList();
+                if((desa != null) && (desa.Count > 0))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        desa
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error, mohon periksa kembali parameter yang Anda masukkan",
+                        
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = true,
+                    Message = $"Error: {ex.Message}",
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+
+
+            return returnedOutput;
         }
 
         public string GetAllProvinsi()
