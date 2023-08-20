@@ -12,6 +12,7 @@ builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -30,6 +31,8 @@ app.UseCors(builder =>
 });
 
 app.UseHttpsRedirection();
+
+//app.UseSession();
 
 app.UseAuthorization();
 

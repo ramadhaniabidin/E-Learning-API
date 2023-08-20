@@ -2,6 +2,7 @@
 using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RestSharp;
 
 namespace E_Learning.API.Controllers
 {
@@ -53,6 +54,8 @@ namespace E_Learning.API.Controllers
         [HttpGet("username/{username}/password/{password}")]
         public IActionResult GetAccountID(string username, string password)
         {
+            //HttpContext.Session.SetString($"User:{username}", username);
+            //HttpContext.Session.SetString($"Password:{password}", password);
             var res = _accountRepository.GetAccountID(username, password);
             return Ok(res);
         }
