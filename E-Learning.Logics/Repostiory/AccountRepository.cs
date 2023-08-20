@@ -3,10 +3,13 @@ using E_Learning.Logics.Models;
 using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -16,9 +19,112 @@ namespace E_Learning.Logics.Repostiory
     public class AccountRepository: IAccountRepository
     {
         private readonly string? connecton;
+
+        private readonly string JwtKey = "LO6i4DuNxIpmGIpjCPRuPwx1NpA2Deuryh7HOsaw_b0";
+        private readonly string JwtIssuer = "https://192.168.1.2:7290";
+        private readonly string JwtAudience = "https://192.168.2.16:7290";
         public AccountRepository(IConfiguration configuration)
         {
             connecton = configuration.GetConnectionString("E-Learning");
+        }
+
+        public string InsertOrUpdateProfile(AccountDetailModel accountDetail, string token)
+        {
+            string returnedOutput = "";
+            try
+            {
+                if((accountDetail != null) && (!string.IsNullOrWhiteSpace(token)))
+                {
+                    TokenValidationParameters validationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidIssuer = JwtIssuer,
+                        ValidAudience = JwtAudience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey)),
+                    };
+
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                    var claims = claimsPrincipal.Claims;
+
+                    if(claims != null)
+                    {
+                        var accountID = claims.FirstOrDefault(c => c.Type == "AccountID")?.Value;
+                        var con = new SqlConnection(connecton);
+                        con.Open();
+
+                        
+                        var query = @"
+                        IF NOT EXISTS (SELECT * FROM dbo.master_detail_akun WHERE id_akun = @accountID)
+                        BEGIN
+                            INSERT INTO dbo.master_detail_akun (id_akun, email, nama, provinsi, kabupaten, kecamatan, desa, no_telp)
+                            VALUES (@accountID, @email, @nama, @provinsi, @kabupaten, @kecamatan, @desa, @no_telp)
+                        END
+                        ELSE
+                        BEGIN
+                            UPDATE dbo.master_detail_akun SET 
+                            nama = @nama, email = @email, provinsi = @provinsi, kabupaten = @kabupaten, kecamatan = @kecamatan, desa = @desa, no_telp = @no_telp
+                            WHERE id_akun = @accountID
+                        END";
+
+                        var queryParams = new
+                        {
+                            accountID = accountID,
+                            email = accountDetail.email,
+                            nama = accountDetail.nama,
+                            provinsi = accountDetail.provinsi,
+                            kabupaten = accountDetail.kabupaten,
+                            kecamatan = accountDetail.kecamatan,
+                            desa = accountDetail.desa,
+                            no_telp = accountDetail.no_telp,
+                        };
+
+                        con.Execute(query, queryParams);
+
+                        var responseBody = new
+                        {
+                            Success = true,
+                            Message = "Successfully updating your profile"
+                        };
+
+                        returnedOutput = JsonSerializer.Serialize(responseBody);
+                    }
+
+                    else
+                    {
+                        var responseBody = new
+                        {
+                            Success = false,
+                            Message = "Invalid credentials"
+                        };
+                        returnedOutput = JsonSerializer.Serialize(responseBody);
+                    }
+                    
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error: Periksa kembali parameter serta token Anda"
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+                returnedOutput = JsonSerializer.Serialize(responseBody);    
+            }
+
+            return returnedOutput;
         }
 
         public string CreateNewAccount(AccountModel account)

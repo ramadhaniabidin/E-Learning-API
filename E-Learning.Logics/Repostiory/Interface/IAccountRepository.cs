@@ -12,6 +12,7 @@ namespace E_Learning.Logics.Repostiory.Interface
         public List<AccountModel> GetAllAccounts();
         public int GetAccountID(string username, string password);
         public string CreateNewAccount(AccountModel account);
+        public string InsertOrUpdateProfile(AccountDetailModel accountDetail, string token);
         public string GetAccountByUsername(string username);
         public string UpdatePassword(string username, string newPassword);
     }

@@ -137,5 +137,12 @@ namespace E_Learning.API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("token/{token}")]
+        public IActionResult InsertOrUpdateProfile(AccountDetailModel model, string token)
+        {
+            var result = _accountRepository.InsertOrUpdateProfile(model, token);
+            return Ok(result);
+        }
     }
 }
