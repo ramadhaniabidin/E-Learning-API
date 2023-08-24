@@ -294,5 +294,95 @@ namespace E_Learning.Logics.Repostiory
 
             return returnedOutput;
         }
+
+        public string GetProfileByToken(string token)
+        {
+            var returnedOutput = "";
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    var accountID = GetAccountIdByToken(token);
+                    var con = new SqlConnection(connecton);
+                    con.Open();
+                    var query = @"SELECT * FROM dbo.master_detail_akun WHERE id_akun = @accountID";
+
+                    var accountDetail = con.QueryFirstOrDefault<AccountDetailModel>(query, new {accountID});
+
+                    if(accountDetail != null)
+                    {
+                        var responseBody = new
+                        {
+                            Success = true,
+                            Message = "Ok",
+                            accountDetail
+                        };
+
+                        returnedOutput = JsonSerializer.Serialize(responseBody);
+                    }
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error: Please check your token"
+                        
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+            catch(Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+
+            return returnedOutput;
+        }
+
+        public string GetAccountIdByToken(string token)
+        {
+            string? output = "";
+            if (!string.IsNullOrEmpty(token))
+            {
+                TokenValidationParameters validationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = JwtIssuer,
+                    ValidAudience = JwtAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey)),
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                var claims = claimsPrincipal.Claims;
+
+                if (claims != null)
+                {
+                    output = claims.FirstOrDefault(c => c.Type == "AccountID")?.Value;
+                }
+
+                else
+                {
+                    output = "";
+                }
+            }
+
+            else
+            {
+                output = "";
+            }
+
+            return output;
+        }
     }
 }

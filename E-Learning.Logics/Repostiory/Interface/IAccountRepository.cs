@@ -15,5 +15,7 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string InsertOrUpdateProfile(AccountDetailModel accountDetail, string token);
         public string GetAccountByUsername(string username);
         public string UpdatePassword(string username, string newPassword);
+        public string GetProfileByToken(string token);
+        public string GetAccountIdByToken(string token);
     }
 }

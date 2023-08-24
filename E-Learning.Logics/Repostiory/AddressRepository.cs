@@ -22,6 +22,49 @@ namespace E_Learning.Logics.Repostiory
             connection = configuration.GetConnectionString("E-Learning");
         }
 
+        public string FilterProvinsi(string provinsi)
+        {
+            string returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"SELECT * FROM dbo.Provinsi WHERE namaProvinsi LIKE '%' + @provinsi + '%'";
+                var prov = con.Query<ProvinsiModel>(query, new {provinsi}).ToList();
+                if((prov != null) && (prov.Count > 0))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        Provinsi = prov
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = $"Tidak ada Provinsi yang mengandung huruf {provinsi}",
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}",
+                };
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+
+            return returnedOutput;
+        }
+
         public string GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName)
         {
             string returnedOutput = "";

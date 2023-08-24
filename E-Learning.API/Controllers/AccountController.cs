@@ -144,5 +144,12 @@ namespace E_Learning.API.Controllers
             var result = _accountRepository.InsertOrUpdateProfile(model, token);
             return Ok(result);
         }
+
+        [HttpGet("token/{token}")]
+        public IActionResult GetAccountDetailByToken(string token)
+        {
+            var result = _accountRepository.GetProfileByToken(token);
+            return Ok(result);
+        }
     }
 }
