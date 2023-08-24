@@ -22,6 +22,59 @@ namespace E_Learning.Logics.Repostiory
             connection = configuration.GetConnectionString("E-Learning");
         }
 
+        public string FilterKabupaten(FilterKabupatenBody body)
+        {
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"SELECT * FROM dbo.Kabupaten WHERE idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsi) 
+                            AND namaKabupaten LIKE '%' + @kabupaten + '%'";
+                var queryParams = new
+                {
+                    provinsi = body.provinsi,
+                    kabupaten = body.kabupaten,
+                };
+
+                var kabupaten = con.Query<KabupatenModel>(query, queryParams).ToList();
+
+                if((kabupaten != null) && (kabupaten.Count > 0))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        Kabupaten = kabupaten
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = $"Tidak ada kabupaten yang mengandung huruf {body.kabupaten}",
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}",
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+            return returnedOutput;
+        }
+
         public string FilterProvinsi(FilterProvinsiBody body)
         {
             string returnedOutput = "";

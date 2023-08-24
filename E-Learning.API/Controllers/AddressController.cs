@@ -28,6 +28,13 @@ namespace E_Learning.API.Controllers
             return Ok(province);
         }
 
+        [HttpPost]
+        public IActionResult FilterKabupaten([FromBody] FilterKabupatenBody body)
+        {
+            var kabupaten = _addressRepository.FilterKabupaten(body);
+            return Ok(kabupaten);
+        }
+
 
         [HttpGet("provinsiName/{provinsiName}")]
         public IActionResult ListKabupatenByProvinsiName(string provinsiName) 
