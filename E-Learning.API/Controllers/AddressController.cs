@@ -1,4 +1,5 @@
-﻿using E_Learning.Logics.Repostiory.Interface;
+﻿using E_Learning.Logics.Models;
+using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.API.Controllers
@@ -20,10 +21,10 @@ namespace E_Learning.API.Controllers
             return Ok(province);
         }
 
-        [HttpGet("provinsiName/{provinsi}")]
-        public IActionResult FilterProvinsi(string provinsi)
+        [HttpPost]
+        public IActionResult FilterProvinsi([FromBody]FilterProvinsiBody body)
         {
-            var province = _addressRepository.FilterProvinsi(provinsi);
+            var province = _addressRepository.FilterProvinsi(body);
             return Ok(province);
         }
 
