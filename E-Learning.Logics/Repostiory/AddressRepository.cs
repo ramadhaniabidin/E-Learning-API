@@ -75,6 +75,63 @@ namespace E_Learning.Logics.Repostiory
             return returnedOutput;
         }
 
+        public string FilterKecamatan(FilterKecamatan body)
+        {
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"DECLARE @idProv INT
+                SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+                DECLARE @idKab INT
+                SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+                SELECT * FROM dbo.Kecamatan WHERE idKab = @idKab AND namaKecamatan LIKE '%' + @kecamatan + '%'";
+
+                var queryParams = new
+                {
+                    provinsiName = body.provinsi,
+                    kabupatenName = body.kabupaten,
+                    kecamatan = body.kecamatan,
+                };
+
+                var kecamatan = con.Query<KecamatanModel>(query, queryParams).ToList();
+                if((kecamatan.Count > 0) && (kecamatan != null))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        Kecamatan = kecamatan
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = $"Tidak ada kecamatan dengan yang mengandung huruf {body.kecamatan}",
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+
+                
+            }
+            catch(Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {body.kecamatan}",
+                };
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+            return returnedOutput;
+        }
+
         public string FilterProvinsi(FilterProvinsiBody body)
         {
             string returnedOutput = "";

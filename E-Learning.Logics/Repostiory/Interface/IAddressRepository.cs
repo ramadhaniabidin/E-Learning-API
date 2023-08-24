@@ -12,6 +12,7 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string GetAllProvinsi();
         public string FilterProvinsi(FilterProvinsiBody body);
         public string FilterKabupaten(FilterKabupatenBody body);
+        public string FilterKecamatan(FilterKecamatan body);
         public string GetKabupatenByProvinsiName(string provinsiName);
         public string GetKecamatan(string provinsiName, string kabupatenName);
         public string GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName);

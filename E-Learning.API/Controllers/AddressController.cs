@@ -35,6 +35,13 @@ namespace E_Learning.API.Controllers
             return Ok(kabupaten);
         }
 
+        [HttpPost]
+        public IActionResult FilterKecamatan([FromBody] FilterKecamatan body)
+        {
+            var kecamatan = _addressRepository.FilterKecamatan(body);
+            return Ok(kecamatan);
+        }
+
 
         [HttpGet("provinsiName/{provinsiName}")]
         public IActionResult ListKabupatenByProvinsiName(string provinsiName) 
