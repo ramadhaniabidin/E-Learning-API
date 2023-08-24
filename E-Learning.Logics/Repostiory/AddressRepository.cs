@@ -22,6 +22,64 @@ namespace E_Learning.Logics.Repostiory
             connection = configuration.GetConnectionString("E-Learning");
         }
 
+        public string FilterDesa(FilterDesa body)
+        {
+            var returnedOutput = "";
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var query = @"DECLARE @idProv INT SET @idProv = (SELECT id FROM dbo.Provinsi WHERE namaProvinsi = @provinsiName)
+                DECLARE @idKab INT SET @idKab = (SELECT id FROM dbo.Kabupaten WHERE namaKabupaten = @kabupatenName AND idProv = @idProv)
+                DECLARE @idKec INT SET @idKec = (SELECT id FROM dbo.Kecamatan WHERE namaKecamatan = @kecamatanName AND @idKab = @idKab)
+
+                SELECT * FROM dbo.Desa WHERE idKec = @idKec AND namaDesa LIKE '%' + @desa + '%'";
+                var queryParams = new
+                {
+                    provinsiName = body.provinsi,
+                    kabupatenName = body.kabupaten,
+                    kecamatanName = body.kecamatan,
+                    desa = body.desa,
+                };
+
+                var desa = con.Query<DesaModel>(query, queryParams).ToList();
+                if((desa != null) && (desa.Count > 0))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        Desa = desa
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = $"Tidak ada desa yang mengandung huruf {body.desa}",
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}",
+                };
+
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+            return returnedOutput;
+        }
+
         public string FilterKabupaten(FilterKabupatenBody body)
         {
             var returnedOutput = "";

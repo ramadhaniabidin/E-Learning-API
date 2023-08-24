@@ -42,6 +42,12 @@ namespace E_Learning.API.Controllers
             return Ok(kecamatan);
         }
 
+        [HttpPost]
+        public IActionResult FilterDesa([FromBody] FilterDesa body)
+        {
+            var desa = _addressRepository.FilterDesa(body);
+            return Ok(desa);
+        }
 
         [HttpGet("provinsiName/{provinsiName}")]
         public IActionResult ListKabupatenByProvinsiName(string provinsiName) 
