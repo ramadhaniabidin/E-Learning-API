@@ -30,44 +30,19 @@ namespace E_Learning.API.Controllers
         //    return View();
         //}
 
+        //[HttpPost("username/{username}/password/{password}/role_id/{role_id}")]
+        //public IActionResult GetLoginToken(string username, string password, int role_id)
+        //{
+        //    //var response = _accountRepository.GenerateLoginToken(model.username, model.password, model.role_id);
+        //    var response = _accountRepository.GenerateLoginToken(username, password, role_id);
+        //    return Ok(response);
+        //}
+
         [HttpPost]
         public IActionResult GetLoginToken([FromBody] AuthModel model)
         {
-            bool falseCondition = (string.IsNullOrWhiteSpace(model.username) || string.IsNullOrWhiteSpace(model.password));
-            if(!falseCondition)
-            {
-                var accountID = _accountRepository.GetAccountID(model.username, model.password, model.role_id);
-                if(accountID != 0)
-                {
-                    var claims = new[]
-                    {
-                        new Claim("Username", model.username),
-                        new Claim("Password", model.password),
-                        new Claim("Role Id", model.role_id.ToString()),
-                        new Claim("AccountID", accountID.ToString())
-                    };
-
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey));
-                    var login = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                    var token = new JwtSecurityToken(
-                        JwtIssuer,
-                        JwtAudience,
-                        claims, expires: DateTime.UtcNow.AddHours(3), signingCredentials:login
-                        );
-
-                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-                    return Ok(jwtToken);
-                }
-                else
-                {
-                    return BadRequest("Invalid Credentials");
-                }
-            }
-
-            else
-            {
-                return BadRequest();
-            }
+            var response = _accountRepository.GenerateLoginToken(model.username, model.password, model.role_id);
+            return Ok(response);
         }
 
         [HttpPost("username/{username}/newPassword/{newPassword}")]
@@ -109,7 +84,7 @@ namespace E_Learning.API.Controllers
             return Ok(res);
         }
 
-        [HttpPost("token/{token}")]
+        [HttpGet("{token}")]
         public IActionResult GetAccountIdByToken(string token)
         {
             if(!string.IsNullOrEmpty(token))

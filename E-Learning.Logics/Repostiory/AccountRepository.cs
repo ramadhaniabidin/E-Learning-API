@@ -3,12 +3,14 @@ using E_Learning.Logics.Models;
 using E_Learning.Logics.Repostiory.Interface;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -383,6 +385,64 @@ namespace E_Learning.Logics.Repostiory
             }
 
             return output;
+        }
+
+        public string GenerateLoginToken(string username, string password, int role_id)
+        {
+            var returnedOutput = "";
+            try
+            {
+                int account_id = GetAccountID(username, password, role_id);
+                if (account_id > 0)
+                {
+                    var claims = new[]
+{
+                        new Claim("Username", username),
+                        new Claim("Password", password),
+                        new Claim("Role Id", role_id.ToString()),
+                        new Claim("AccountID", account_id.ToString())
+                    };
+
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey));
+                    var login = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var token = new JwtSecurityToken(
+                        JwtIssuer,
+                        JwtAudience,
+                        claims, expires: DateTime.UtcNow.AddHours(3), signingCredentials: login
+                        );
+
+                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        LoginToken = jwtToken
+                    };
+
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error, mohon periksa kembali parameter yang Anda masukkan"
+                    };
+                    returnedOutput = JsonSerializer.Serialize(responseBody);
+                }
+            }
+            catch(Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+                returnedOutput = JsonSerializer.Serialize(responseBody);
+            }
+
+            return returnedOutput;
         }
     }
 }
