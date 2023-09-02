@@ -224,12 +224,12 @@ namespace E_Learning.Logics.Repostiory
             return returnedOutput;
         }
 
-        public int GetAccountID(string username, string password)
+        public int GetAccountID(string username, string password, int role_id)
         {
             using var con = new SqlConnection(connecton);
             con.Open();
-            var query = @"SELECT id FROM master_akun WHERE username=@username AND password=@password";
-            var id = con.QueryFirstOrDefault<int>(query, new { username, password });
+            var query = @"SELECT id FROM master_akun WHERE username=@username AND password=@password AND id_peran=@role_id";
+            var id = con.QueryFirstOrDefault<int>(query, new { username, password, role_id });
             return id;
         }
 

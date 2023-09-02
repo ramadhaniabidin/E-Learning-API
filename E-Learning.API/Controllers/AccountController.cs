@@ -30,19 +30,20 @@ namespace E_Learning.API.Controllers
         //    return View();
         //}
 
-        [HttpPost("username/{username}/password/{password}")]
-        public IActionResult GetLoginToken(string username, string password)
+        [HttpPost]
+        public IActionResult GetLoginToken([FromBody] AuthModel model)
         {
-            bool falseCondition = (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password));
+            bool falseCondition = (string.IsNullOrWhiteSpace(model.username) || string.IsNullOrWhiteSpace(model.password));
             if(!falseCondition)
             {
-                var accountID = _accountRepository.GetAccountID(username, password);
+                var accountID = _accountRepository.GetAccountID(model.username, model.password, model.role_id);
                 if(accountID != 0)
                 {
                     var claims = new[]
                     {
-                        new Claim("Username", username),
-                        new Claim("Password", password),
+                        new Claim("Username", model.username),
+                        new Claim("Password", model.password),
+                        new Claim("Role Id", model.role_id.ToString()),
                         new Claim("AccountID", accountID.ToString())
                     };
 
@@ -99,12 +100,12 @@ namespace E_Learning.API.Controllers
             return Ok(res);
         }
 
-        [HttpGet("username/{username}/password/{password}")]
-        public IActionResult GetAccountID(string username, string password)
+        [HttpGet("username/{username}/password/{password}/role_id/{role_id}")]
+        public IActionResult GetAccountID(string username, string password, int role_id)
         {
             //HttpContext.Session.SetString($"User:{username}", username);
             //HttpContext.Session.SetString($"Password:{password}", password);
-            var res = _accountRepository.GetAccountID(username, password);
+            var res = _accountRepository.GetAccountID(username, password, role_id);
             return Ok(res);
         }
 
