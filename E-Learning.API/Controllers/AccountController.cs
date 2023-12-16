@@ -26,7 +26,7 @@ namespace E_Learning.API.Controllers
         }
 
         //public IActionResult Index()
-        //{
+        //
         //    return View();
         //}
 

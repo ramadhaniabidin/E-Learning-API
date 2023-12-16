@@ -427,7 +427,7 @@ namespace E_Learning.Logics.Repostiory
                     var responseBody = new
                     {
                         Success = false,
-                        Message = "Error, mohon periksa kembali parameter yang Anda masukkan"
+                        Message = "Error! mohon periksa kembali username, password dan tipe akun Anda"
                     };
                     returnedOutput = JsonSerializer.Serialize(responseBody);
                 }
