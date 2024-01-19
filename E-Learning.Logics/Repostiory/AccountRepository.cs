@@ -396,7 +396,7 @@ namespace E_Learning.Logics.Repostiory
                 if (account_id > 0)
                 {
                     var claims = new[]
-{
+                    {
                         new Claim("Username", username),
                         new Claim("Password", password),
                         new Claim("Role Id", role_id.ToString()),
