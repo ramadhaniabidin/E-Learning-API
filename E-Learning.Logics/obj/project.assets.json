@@ -2219,19 +2219,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ramad\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ramad\\OneDrive\\Documents\\Belajar\\.NET Web API\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
       "projectName": "E-Learning.Logics",
-      "projectPath": "C:\\Users\\ramad\\OneDrive\\Documents\\Belajar\\.NET Web API\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
-      "packagesPath": "C:\\Users\\ramad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ramad\\OneDrive\\Documents\\Belajar\\.NET Web API\\E-Learning-API\\E-Learning.Logics\\obj\\",
+      "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ramad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2290,7 +2290,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
