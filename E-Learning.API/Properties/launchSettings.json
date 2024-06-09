@@ -12,9 +12,9 @@
     "E_Learning.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7290;http://192.168.5.1",
+      "applicationUrl": "https://192.168.1.4:7290;http://192.168.1.4",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
