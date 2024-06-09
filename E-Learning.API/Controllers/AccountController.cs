@@ -37,6 +37,12 @@ namespace E_Learning.API.Controllers
         //    var response = _accountRepository.GenerateLoginToken(username, password, role_id);
         //    return Ok(response);
         //}
+        [HttpPost]
+        public IActionResult SignUp([FromBody] SignUpModel model)
+        {
+            var response = _accountRepository.SignUp(model);
+            return Ok(response);
+        }
 
         [HttpPost]
         public IActionResult GetLoginToken([FromBody] AuthModel model)

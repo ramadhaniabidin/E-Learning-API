@@ -18,5 +18,7 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string GetProfileByToken(string token);
         public string GetAccountIdByToken(string token);
         public string GenerateLoginToken(string username, string password, int role_id);
+        public string SignUp(SignUpModel model);
+        public bool CheckEmailExists(string email);
     }
 }

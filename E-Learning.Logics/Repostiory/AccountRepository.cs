@@ -444,5 +444,76 @@ namespace E_Learning.Logics.Repostiory
 
             return returnedOutput;
         }
+
+
+        public string SignUp(SignUpModel model)
+        {
+            var returnedString = "";
+            try
+            {
+                bool emailExist = CheckEmailExists(model.email);
+                if (emailExist) 
+                {
+                    var respBody = new
+                    {
+                        Success = false,
+                        Message = "Email sudah terdaftar, mohon gunakan alamat email yang lain"
+                    };
+                    returnedString = JsonSerializer.Serialize(respBody);
+                }
+
+                else
+                {
+                    using var con = new SqlConnection(connecton);
+                    con.Open();
+                    var query = @"INSERT INTO dbo.master_akun" +
+                        "([email], [password], [akun_aktif])" +
+                        "VALUES" +
+                        "(@email, @password, 1)";
+                    var param = new { model.email, model.password };
+                    con.Execute(query, param);
+                    con.Close();
+
+                    var respBody = new
+                    {
+                        Success = true,
+                        Message = "Sign Up Sukses!"
+                    };
+                    returnedString = JsonSerializer.Serialize(respBody);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                var respBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+                returnedString = JsonSerializer.Serialize(respBody);
+            }
+            return returnedString;
+        }
+
+        public bool CheckEmailExists(string email)
+        {
+            try
+            {
+                using var con = new SqlConnection(connecton);
+                con.Open();
+                var query = @"SELECT COUNT(*) FROM dbo.master_akun WHERE email = @email";
+                Console.WriteLine("Current process: Check whether the email is already used or not");
+                Console.WriteLine($"Executed query: {query}");
+                var param = new { email };
+                int emailCount = con.ExecuteScalar<int>(query, param);
+                con.Close();
+
+                return emailCount > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
