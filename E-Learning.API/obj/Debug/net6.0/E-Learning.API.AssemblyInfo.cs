@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("E-Learning.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11afc4f32c2bd7c9f7da8d1c996491b05ec06c0a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c081f762f1dde5d33740b096096c2e198b68730f")]
 [assembly: System.Reflection.AssemblyProductAttribute("E-Learning.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E-Learning.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
