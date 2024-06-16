@@ -25,18 +25,6 @@ namespace E_Learning.API.Controllers
             _accountRepository = accountRepository;
         }
 
-        //public IActionResult Index()
-        //
-        //    return View();
-        //}
-
-        //[HttpPost("username/{username}/password/{password}/role_id/{role_id}")]
-        //public IActionResult GetLoginToken(string username, string password, int role_id)
-        //{
-        //    //var response = _accountRepository.GenerateLoginToken(model.username, model.password, model.role_id);
-        //    var response = _accountRepository.GenerateLoginToken(username, password, role_id);
-        //    return Ok(response);
-        //}
         [HttpPost]
         public IActionResult SignUp([FromBody] SignUpModel model)
         {
@@ -84,8 +72,6 @@ namespace E_Learning.API.Controllers
         [HttpGet("username/{username}/password/{password}/role_id/{role_id}")]
         public IActionResult GetAccountID(string username, string password, int role_id)
         {
-            //HttpContext.Session.SetString($"User:{username}", username);
-            //HttpContext.Session.SetString($"Password:{password}", password);
             var res = _accountRepository.GetAccountID(username, password, role_id);
             return Ok(res);
         }

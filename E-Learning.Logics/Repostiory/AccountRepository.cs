@@ -25,6 +25,7 @@ namespace E_Learning.Logics.Repostiory
         private readonly string JwtKey = "LO6i4DuNxIpmGIpjCPRuPwx1NpA2Deuryh7HOsaw_b0";
         private readonly string JwtIssuer = "https://192.168.1.2:7290";
         private readonly string JwtAudience = "https://192.168.2.16:7290";
+        private readonly string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         public AccountRepository(IConfiguration configuration)
         {
             connecton = configuration.GetConnectionString("E-Learning");
@@ -449,6 +450,15 @@ namespace E_Learning.Logics.Repostiory
         public string SignUp(SignUpModel model)
         {
             var returnedString = "";
+            #region Generate random acccount name string
+            StringBuilder sb = new(15);
+            Random random = new();
+            for(int i = 0; i < 15; i++)
+            {
+                sb.Append(chars[random.Next(chars.Length)]);
+            }
+            string randomAccName = sb.ToString();
+            #endregion
             try
             {
                 bool emailExist = CheckEmailExists(model.email);
@@ -467,10 +477,10 @@ namespace E_Learning.Logics.Repostiory
                     using var con = new SqlConnection(connecton);
                     con.Open();
                     var query = @"INSERT INTO dbo.master_akun" +
-                        "([email], [password], [akun_aktif])" +
+                        "([email], [password], [akun_aktif], [nama])" +
                         "VALUES" +
-                        "(@email, @password, 1)";
-                    var param = new { model.email, model.password };
+                        "(@email, @password, 1, @nama)";
+                    var param = new { model.email, model.password, nama = randomAccName };
                     con.Execute(query, param);
                     con.Close();
 
