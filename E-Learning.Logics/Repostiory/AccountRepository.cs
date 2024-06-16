@@ -25,6 +25,7 @@ namespace E_Learning.Logics.Repostiory
         private readonly string JwtKey = "LO6i4DuNxIpmGIpjCPRuPwx1NpA2Deuryh7HOsaw_b0";
         private readonly string JwtIssuer = "https://192.168.1.2:7290";
         private readonly string JwtAudience = "https://192.168.2.16:7290";
+        private readonly string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         public AccountRepository(IConfiguration configuration)
         {
             connecton = configuration.GetConnectionString("E-Learning");
@@ -443,6 +444,86 @@ namespace E_Learning.Logics.Repostiory
             }
 
             return returnedOutput;
+        }
+
+
+        public string SignUp(SignUpModel model)
+        {
+            var returnedString = "";
+            #region Generate random acccount name string
+            StringBuilder sb = new(15);
+            Random random = new();
+            for(int i = 0; i < 15; i++)
+            {
+                sb.Append(chars[random.Next(chars.Length)]);
+            }
+            string randomAccName = sb.ToString();
+            #endregion
+            try
+            {
+                bool emailExist = CheckEmailExists(model.email);
+                if (emailExist) 
+                {
+                    var respBody = new
+                    {
+                        Success = false,
+                        Message = "Email sudah terdaftar, mohon gunakan alamat email yang lain"
+                    };
+                    returnedString = JsonSerializer.Serialize(respBody);
+                }
+
+                else
+                {
+                    using var con = new SqlConnection(connecton);
+                    con.Open();
+                    var query = @"INSERT INTO dbo.master_akun" +
+                        "([email], [password], [akun_aktif], [nama])" +
+                        "VALUES" +
+                        "(@email, @password, 1, @nama)";
+                    var param = new { model.email, model.password, nama = randomAccName };
+                    con.Execute(query, param);
+                    con.Close();
+
+                    var respBody = new
+                    {
+                        Success = true,
+                        Message = "Sign Up Sukses!"
+                    };
+                    returnedString = JsonSerializer.Serialize(respBody);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                var respBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+                returnedString = JsonSerializer.Serialize(respBody);
+            }
+            return returnedString;
+        }
+
+        public bool CheckEmailExists(string email)
+        {
+            try
+            {
+                using var con = new SqlConnection(connecton);
+                con.Open();
+                var query = @"SELECT COUNT(*) FROM dbo.master_akun WHERE email = @email";
+                Console.WriteLine("Current process: Check whether the email is already used or not");
+                Console.WriteLine($"Executed query: {query}");
+                var param = new { email };
+                int emailCount = con.ExecuteScalar<int>(query, param);
+                con.Close();
+
+                return emailCount > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
