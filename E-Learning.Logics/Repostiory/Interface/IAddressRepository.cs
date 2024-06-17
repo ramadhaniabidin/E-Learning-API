@@ -9,7 +9,7 @@ namespace E_Learning.Logics.Repostiory.Interface
 {
     public interface IAddressRepository
     {
-        public string GetAllProvinsi();
+        public string GetAllProvinsi(PopUp_Model model);
         public string FilterProvinsi(FilterProvinsiBody body);
         public string FilterKabupaten(FilterKabupatenBody body);
         public string FilterKecamatan(FilterKecamatan body);
@@ -17,5 +17,6 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string GetKabupatenByProvinsiName(string provinsiName);
         public string GetKecamatan(string provinsiName, string kabupatenName);
         public string GetAllDesa(string provinsiName, string kabupatenName, string kecamatanName);
+        //public string PopUp_Alamat();
     }
 }

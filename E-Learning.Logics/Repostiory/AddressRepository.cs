@@ -288,7 +288,7 @@ namespace E_Learning.Logics.Repostiory
             return returnedOutput;
         }
 
-        public string GetAllProvinsi()
+        public string GetAllProvinsi(PopUp_Model model)
         {
             var returnedOutput = "";
 
@@ -296,9 +296,25 @@ namespace E_Learning.Logics.Repostiory
             {
                 using var con = new SqlConnection(connection);
                 con.Open();
-                var query = "SELECT * FROM dbo.Provinsi";
-                var province = con.Query<ProvinsiModel>(query).ToList();
-
+                var param = new {
+                    pageSize = model.PageSize, 
+                    pageIndex = model.PageIndex, 
+                    searchValue = model.SearchValue
+                };
+                var query = $@"
+                SELECT * FROM (
+	                SELECT *, ROW_NUMBER() OVER (ORDER BY namaProvinsi ASC) AS rowNum, 
+	                ((SELECT COUNT(*) FROM (
+		                SELECT * FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
+	                ) AS SubQuery) / @pageSize) + 1 AS totalPage
+	                FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
+                ) 
+                AS SubQuery
+                WHERE rowNum > (@pageSize * (@pageIndex - 1)) 
+                AND rowNum <= (@pageSize * @pageIndex)";
+                Console.WriteLine(query);
+                var province = con.Query<ProvinsiModel>(query, param).ToList();
+                con.Close();
                 if((province != null) && (province.Count > 0))
                 {
                     var responseBody = new

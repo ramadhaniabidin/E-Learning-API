@@ -14,10 +14,10 @@ namespace E_Learning.API.Controllers
             _addressRepository = addressRepository;
         }
 
-        [HttpGet]
-        public IActionResult GetAllProvince()
+        [HttpPost]
+        public IActionResult GetAllProvince([FromBody] PopUp_Model model)
         {
-            var province = _addressRepository.GetAllProvinsi();
+            var province = _addressRepository.GetAllProvinsi(model);
             return Ok(province);
         }
 
