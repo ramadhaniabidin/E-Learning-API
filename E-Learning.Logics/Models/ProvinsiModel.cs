@@ -10,5 +10,6 @@ namespace E_Learning.Logics.Models
     {
         public int id { get; set; }
         public string? namaProvinsi { get; set; }
+        public int totalPage { get; set; }
     }
 }
