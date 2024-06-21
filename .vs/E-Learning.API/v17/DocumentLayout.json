@@ -57,14 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{860C12B0-6F41-432C-B466-965C1D6F31DC}|E-Learning.API\\E-Learning.API.csproj|c:\\users\\administrator\\documents\\github\\e-learning-api\\e-learning.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{860C12B0-6F41-432C-B466-965C1D6F31DC}|E-Learning.API\\E-Learning.API.csproj|solutionrelative:e-learning.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\Query.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Query.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\Query.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Query.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -87,8 +79,7 @@
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-16T14:06:07.565Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -101,8 +92,7 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-16T14:06:21.991Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -114,8 +104,7 @@
               "RelativeToolTip": "E-Learning.Logics\\Models\\ProvinsiModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T16:29:50.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T16:29:50.294Z"
             },
             {
               "$type": "Document",
@@ -127,8 +116,7 @@
               "RelativeToolTip": "E-Learning.Logics\\Repostiory\\AddressRepository.cs",
               "ViewState": "AQIAACUBAAAAAAAAAAAIwCoBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T14:44:43.618Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T14:44:43.618Z"
             },
             {
               "$type": "Document",
@@ -140,8 +128,7 @@
               "RelativeToolTip": "E-Learning.API\\Controllers\\AddressController.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAxwA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T13:58:22.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T13:58:22.503Z"
             },
             {
               "$type": "Document",
@@ -158,13 +145,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Query.sql ",
+              "Title": "Query.sql",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\Query.sql",
               "RelativeDocumentMoniker": "Query.sql",
-              "ToolTip": "Query.sql ",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\Query.sql",
+              "RelativeToolTip": "Query.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-06-13T13:00:03.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T13:00:03.257Z"
             },
             {
               "$type": "Document",
@@ -172,9 +159,9 @@
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "E-Learning.API\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\Properties\\launchSettings.json*",
-              "RelativeToolTip": "E-Learning.API\\Properties\\launchSettings.json*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAXAAAA",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "E-Learning.API\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-06-13T11:22:44.16Z",
               "EditorCaption": ""
@@ -189,8 +176,7 @@
               "RelativeToolTip": "E-Learning.Logics\\Repostiory\\Interface\\IAddressRepository.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T14:04:44.214Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T14:04:44.214Z"
             },
             {
               "$type": "Document",
@@ -202,8 +188,7 @@
               "RelativeToolTip": "E-Learning.API\\Program.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T11:38:24.555Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T11:38:24.555Z"
             },
             {
               "$type": "Document",
@@ -215,8 +200,7 @@
               "RelativeToolTip": "E-Learning.Logics\\Repostiory\\TestRepository.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAQwCoAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T13:52:00.16Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T13:52:00.16Z"
             },
             {
               "$type": "Document",
