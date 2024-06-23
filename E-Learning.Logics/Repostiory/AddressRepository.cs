@@ -480,6 +480,14 @@ namespace E_Learning.Logics.Repostiory
                 {
                     data = con.Query<KabupatenModel>(query, param).ToList();
                 }
+                else if (model.TableName.ToLower().Contains("kecamatan"))
+                {
+                    data = con.Query<KecamatanModel>(query, param).ToList();
+                }
+                else
+                {
+                    data = con.Query<DesaModel>(query, param).ToList();
+                }
                 //var province = con.Query<ProvinsiModel>(query, param).ToList();
                 con.Close();
                 if ((data != null) && (data.Any()))
