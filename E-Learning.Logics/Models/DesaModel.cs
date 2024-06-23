@@ -11,5 +11,6 @@ namespace E_Learning.Logics.Models
         public int id {get; set;}
         public int idKec { get; set;}
         public string? namaDesa { get; set;}
+        public int totalPage { get; set;}
     }
 }
