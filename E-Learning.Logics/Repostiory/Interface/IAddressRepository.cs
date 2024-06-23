@@ -10,6 +10,7 @@ namespace E_Learning.Logics.Repostiory.Interface
     public interface IAddressRepository
     {
         public string GetAllProvinsi(PopUp_Model model);
+        public string GetPopUpData(PopUp_Model model);
         public string FilterProvinsi(FilterProvinsiBody body);
         public string FilterKabupaten(FilterKabupatenBody body);
         public string FilterKecamatan(FilterKecamatan body);

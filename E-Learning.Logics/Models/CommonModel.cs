@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace E_Learning.Logics.Models
 {
-    public class KabupatenModel
+    public class CommonModel
     {
         public int id { get; set; }
-        public int idProv { get; set; }
-        public string? namaKabupaten { get; set; }
+        public string items { get; set; } = string.Empty;
         public int totalPage { get; set; }
     }
 }

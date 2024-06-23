@@ -19,7 +19,7 @@ namespace E_Learning.Logics.Repostiory
         private readonly string? connection;
         public AddressRepository(IConfiguration configuration)
         {
-            connection = configuration.GetConnectionString("E-Learning");
+            connection = configuration.GetConnectionString("connstring_OnPC");
         }
 
         public string FilterDesa(FilterDesa body)
@@ -296,18 +296,19 @@ namespace E_Learning.Logics.Repostiory
             {
                 using var con = new SqlConnection(connection);
                 con.Open();
-                var param = new {
-                    pageSize = model.PageSize, 
-                    pageIndex = model.PageIndex, 
+                var param = new
+                {
+                    pageSize = model.PageSize,
+                    pageIndex = model.PageIndex,
                     searchValue = model.SearchValue
                 };
                 var query = $@"
                 SELECT * FROM (
-	                SELECT *, ROW_NUMBER() OVER (ORDER BY namaProvinsi ASC) AS rowNum, 
-	                ((SELECT COUNT(*) FROM (
-		                SELECT * FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
-	                ) AS SubQuery) / @pageSize) + 1 AS totalPage
-	                FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
+                 SELECT *, ROW_NUMBER() OVER (ORDER BY namaProvinsi ASC) AS rowNum, 
+                 ((SELECT COUNT(*) FROM (
+                  SELECT * FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
+                 ) AS SubQuery) / @pageSize) + 1 AS totalPage
+                 FROM Provinsi WHERE namaProvinsi LIKE '%' + @searchValue + '%'
                 ) 
                 AS SubQuery
                 WHERE rowNum > (@pageSize * (@pageIndex - 1)) 
@@ -346,6 +347,7 @@ namespace E_Learning.Logics.Repostiory
                     Success = false,
                     Message = $"Error: {ex.Message}"
                 };
+                returnedOutput = JsonSerializer.Serialize(responseBody);
             }
 
             //return province;
@@ -451,6 +453,69 @@ namespace E_Learning.Logics.Repostiory
 
 
             return returnedOutput;
+        }
+
+        public string GetPopUpData(PopUp_Model model)
+        {
+            try
+            {
+                using var con = new SqlConnection(connection);
+                con.Open();
+                var param = new
+                {
+                    tableName = model.TableName,
+                    searchColumn = model.SearchColumn,
+                    searchValue = model.SearchValue,
+                    pageIndex = model.PageIndex,
+                    pageSize = model.PageSize,
+                    searchType = model.SearchType
+                };
+                IEnumerable<dynamic> data = null;
+                var query = "EXEC dbo.GetPopUpData @tableName, @searchColumn, @searchValue, @pageIndex, @pageSize, @searchType";
+                if (model.TableName.ToLower().Contains("provinsi"))
+                {
+                    data = con.Query<ProvinsiModel>(query, param).ToList();
+                }
+                else if (model.TableName.ToLower().Contains("kabupaten"))
+                {
+                    data = con.Query<KabupatenModel>(query, param).ToList();
+                }
+                //var province = con.Query<ProvinsiModel>(query, param).ToList();
+                con.Close();
+                if ((data != null) && (data.Any()))
+                {
+                    var responseBody = new
+                    {
+                        Success = true,
+                        Message = "Berhasil mendapatkan data Provinsi",
+                        Data = data
+                    };
+
+                    return JsonSerializer.Serialize(responseBody);
+                }
+
+                else
+                {
+                    var responseBody = new
+                    {
+                        Success = false,
+                        Message = "Error!"
+                    };
+
+                    return JsonSerializer.Serialize(responseBody);
+                }
+
+            }
+
+            catch(Exception ex)
+            {
+                var responseBody = new
+                {
+                    Success = false,
+                    Message = $"Error: {ex.Message}"
+                };
+                return JsonSerializer.Serialize(responseBody);
+            }
         }
     }
 }

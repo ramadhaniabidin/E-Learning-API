@@ -11,3 +11,16 @@ C:\Users\Administrator\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Deb
 C:\Users\Administrator\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\refint\E-Learning.Logics.dll
 C:\Users\Administrator\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.pdb
 C:\Users\Administrator\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\ref\E-Learning.Logics.dll
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\bin\Debug\net6.0\E-Learning.Logics.deps.json
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\bin\Debug\net6.0\E-Learning.Logics.dll
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\bin\Debug\net6.0\E-Learning.Logics.pdb
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.csproj.AssemblyReference.cache
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.AssemblyInfoInputs.cache
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.AssemblyInfo.cs
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.sourcelink.json
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.dll
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\refint\E-Learning.Logics.dll
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\E-Learning.Logics.pdb
+C:\Users\USER\Documents\GitHub\E-Learning-API\E-Learning.Logics\obj\Debug\net6.0\ref\E-Learning.Logics.dll

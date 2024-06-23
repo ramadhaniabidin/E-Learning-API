@@ -15,6 +15,13 @@ namespace E_Learning.API.Controllers
         }
 
         [HttpPost]
+        public IActionResult GetPopUpData([FromBody] PopUp_Model model)
+        {
+            var data = _addressRepository.GetPopUpData(model);
+            return Ok(data);
+        }
+
+        [HttpPost]
         public IActionResult GetAllProvince([FromBody] PopUp_Model model)
         {
             var province = _addressRepository.GetAllProvinsi(model);

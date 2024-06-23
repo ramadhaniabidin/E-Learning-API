@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj": {}
+    "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj": {
+    "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj",
         "projectName": "E-Learning.API",
-        "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\E-Learning.API.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,15 +22,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj"
+              "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj": {
+                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj"
               }
             }
           }
@@ -39,11 +38,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -78,21 +72,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj": {
+    "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
         "projectName": "E-Learning.Logics",
-        "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\E-Learning.Logics.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\E-Learning-API\\E-Learning.Logics\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,7 +94,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -113,11 +106,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -157,7 +145,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
