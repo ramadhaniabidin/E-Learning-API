@@ -32,6 +32,13 @@ namespace E_Learning.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("id/{id}")]
+        public IActionResult GetAccountData(int id)
+        {
+            var response = _accountRepository.GetAccountData(id);
+            return Ok(response);
+        }
+
         [HttpPost]
         public IActionResult GetLoginToken([FromBody] AuthModel model)
         {

@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace E_Learning.Logics.Repostiory
         private readonly string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         public AccountRepository(IConfiguration configuration)
         {
-            connecton = configuration.GetConnectionString("E-Learning");
+            connecton = configuration.GetConnectionString("connstring_OnPC");
         }
 
         public string InsertOrUpdateProfile(AccountDetailModel accountDetail, string token)
@@ -477,7 +478,7 @@ namespace E_Learning.Logics.Repostiory
                     using var con = new SqlConnection(connecton);
                     con.Open();
                     var query = @"INSERT INTO dbo.master_akun" +
-                        "([email], [password], [akun_aktif], [nama])" +
+                        "([email], [password], [akun_aktif], [username])" +
                         "VALUES" +
                         "(@email, @password, 1, @nama)";
                     var param = new { model.email, model.password, nama = randomAccName };
@@ -532,11 +533,40 @@ namespace E_Learning.Logics.Repostiory
             try
             {
                 using var con = new SqlConnection(connecton);
+                con.Open();
+                var query = @"SELECT * FROM dbo.master_akun WHERE id = @id";
+                var param = new { id = account_id };
+                AccountModel account = con.QueryFirst<AccountModel>(query, param);
+                con.Close();
+                if(account != null)
+                {
+                    var respBody = new
+                    {
+                        Success = true,
+                        Message = "OK",
+                        Account = account
+                    };
+                    response = JsonSerializer.Serialize(respBody);
+                }
+                else
+                {
+                    var respBody = new
+                    {
+                        Success = false,
+                        Message = "Tidak ada akun yg ditemukan"
+                    };
+                    response = JsonSerializer.Serialize(respBody);
+                }
 
             }
             catch(Exception ex)
             {
-
+                var respBody = new
+                {
+                    Success = false,
+                    Message = $"Error : {ex.Message}"
+                };
+                response = JsonSerializer.Serialize(respBody);
             }
             return response;
         }
