@@ -525,5 +525,20 @@ namespace E_Learning.Logics.Repostiory
                 throw;
             }
         }
+
+        public string GetAccountData(int account_id)
+        {
+            string response = "";
+            try
+            {
+                using var con = new SqlConnection(connecton);
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return response;
+        }
     }
 }
