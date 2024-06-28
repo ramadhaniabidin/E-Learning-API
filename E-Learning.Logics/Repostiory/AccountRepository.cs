@@ -570,5 +570,52 @@ namespace E_Learning.Logics.Repostiory
             }
             return response;
         }
+
+        public string SaveUpdateProfile(AccountModel account)
+        {
+            string response = "";
+            try
+            {
+                using var con = new SqlConnection(connecton);
+                con.Open();
+                var query = @"UPDATE dbo.master_akun " +
+                    "SET [provinsi] = @provinsi," +
+                    "[kabupaten] = @kabupaten," +
+                    "[kecamatan] = @kecamatan," +
+                    "[desa] = @desa," +
+                    "[no_telp] = @no_telp," +
+                    "[username] = @username," +
+                    "[nama] = @nama" +
+                    " WHERE id = @id";
+                var param = new
+                {
+                    provinsi = account.provinsi,
+                    kabupaten = account.kabupaten,
+                    kecamatan = account.kecamatan,
+                    desa = account.desa,
+                    no_telp = account.no_telp,
+                    username = account.username,
+                    nama = account.nama,
+                    id = account.id
+                };
+                con.Execute(query, param);
+                var respBody = new
+                {
+                    Success = true,
+                    Message = "OK"
+                };
+                response = JsonSerializer.Serialize(respBody);
+            }
+            catch(Exception ex)
+            {
+                var respBody = new
+                {
+                    Success = false,
+                    Message = $"Error : {ex.Message}"
+                };
+                response = JsonSerializer.Serialize(respBody);
+            }
+            return response;
+        }
     }
 }

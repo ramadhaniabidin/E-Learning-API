@@ -40,6 +40,13 @@ namespace E_Learning.API.Controllers
         }
 
         [HttpPost]
+        public IActionResult UpdateProvile([FromBody]AccountModel model)
+        {
+            var response = _accountRepository.SaveUpdateProfile(model);
+            return Ok(response);
+        }
+
+        [HttpPost]
         public IActionResult GetLoginToken([FromBody] AuthModel model)
         {
             var response = _accountRepository.GenerateLoginToken(model.username, model.password, model.role_id);
