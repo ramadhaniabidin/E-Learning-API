@@ -20,5 +20,6 @@ namespace E_Learning.Logics.Repostiory.Interface
         public string GenerateLoginToken(string username, string password, int role_id);
         public string SignUp(SignUpModel model);
         public bool CheckEmailExists(string email);
+        public string GetAccountData(int account_id);
     }
 }

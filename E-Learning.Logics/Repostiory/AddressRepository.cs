@@ -470,7 +470,7 @@ namespace E_Learning.Logics.Repostiory
                     pageSize = model.PageSize,
                     searchType = model.SearchType
                 };
-                IEnumerable<dynamic> data = null;
+                IEnumerable<dynamic>? data = null;
                 var query = "EXEC dbo.GetPopUpData @tableName, @searchColumn, @searchValue, @pageIndex, @pageSize, @searchType";
                 if (model.TableName.ToLower().Contains("provinsi"))
                 {
